@@ -1,0 +1,444 @@
+/* Color Variables */
+:root {
+  --primary-brown: #5D4037;
+  --light-brown: #8D6E63;
+  --dark-brown: #3E2723;
+  --cream: #EFEBE9;
+}
+
+/* Background */
+.secret-bg {
+  background-color: var(--primary-brown);
+}
+
+/* Heading */
+.secret-heading {
+  color: var(--cream);
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Button */
+.secret-btn {
+  background-color: var(--light-brown);
+  color: white;
+  border: none;
+  padding: 0.75rem 2.5rem;
+  font-size: 1.25rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.secret-btn:hover {
+  background-color: var(--dark-brown);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+/* Add these to your existing style.css */
+.secret-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 450px;
+  border: 1px solid var(--accent-brown);
+}
+
+.secret-input {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--accent-brown);
+  color: white;
+  padding: 12px 15px;
+  border-radius: 8px;
+}
+
+.secret-input:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: var(--light-brown);
+  color: white;
+  box-shadow: 0 0 0 0.25rem rgba(161, 136, 127, 0.25);
+}
+
+.text-cream {
+  color: var(--cream);
+  text-decoration: none;
+}
+
+.text-cream:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .secret-card {
+    padding: 2rem 1.5rem !important;
+  }
+}
+/* Django Form Styling */
+.secret-form-fields p {
+  margin-bottom: 1rem;
+}
+
+.secret-form-fields label {
+  display: block;
+  color: var(--cream);
+  margin-bottom: 0.5rem;
+}
+
+.secret-form-fields input {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--accent-brown);
+  color: white;
+  padding: 12px 15px;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.secret-form-fields input:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: var(--light-brown);
+  color: white;
+  box-shadow: 0 0 0 0.25rem rgba(161, 136, 127, 0.25);
+}
+
+/* Error message styling */
+.secret-form-fields .errorlist {
+  color: #ff6b6b;
+  padding-left: 0;
+  list-style: none;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+/* ================ */
+/* COLOR VARIABLES  */
+/* ================ */
+:root {
+    --primary-brown: #5D4037;
+    --light-brown: #8D6E63;
+    --dark-brown: #3E2723;
+    --accent-brown: #A1887F;
+    --cream: #EFEBE9;
+    --error-red: #FF6B6B;
+}
+
+/* ================ */
+/* BASE STYLES      */
+/* ================ */
+.secret-bg {
+    background-color: var(--primary-brown);
+    min-height: 100vh;
+    padding: 2rem 0;
+}
+
+/* ================ */
+/* CARD STYLES      */
+/* ================ */
+.secret-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    border: 1px solid var(--accent-brown);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* ================ */
+/* TYPOGRAPHY       */
+/* ================ */
+.secret-heading {
+    color: var(--cream);
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.text-cream {
+    color: var(--cream);
+    opacity: 0.9;
+}
+
+.text-cream:hover {
+    color: white;
+    opacity: 1;
+}
+
+/* ================ */
+/* FORM ELEMENTS    */
+/* ================ */
+.secret-input {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid var(--accent-brown) !important;
+    color: white !important;
+}
+
+.secret-input:focus {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    border-color: var(--light-brown) !important;
+    color: white !important;
+    box-shadow: 0 0 0 0.25rem rgba(161, 136, 127, 0.25) !important;
+}
+
+/* ================ */
+/* BUTTON STYLES    */
+/* ================ */
+.secret-btn {
+    background-color: var(--light-brown);
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.secret-btn:hover {
+    background-color: var(--dark-brown);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ================ */
+/* RESPONSIVE       */
+/* ================ */
+@media (max-width: 768px) {
+    .secret-heading {
+        font-size: 2rem;
+    }
+    
+    .secret-card {
+        padding: 2rem !important;
+    }
+}/* Color Variables */
+:root {
+  --primary-brown: #5D4037;
+  --light-brown: #8D6E63;
+  --dark-brown: #3E2723;
+  --cream: #EFEBE9;
+}
+
+/* Background */
+.secret-bg {
+  background-color: var(--primary-brown);
+}
+
+/* Heading */
+.secret-heading {
+  color: var(--cream);
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Button */
+.secret-btn {
+  background-color: var(--light-brown);
+  color: white;
+  border: none;
+  padding: 0.75rem 2.5rem;
+  font-size: 1.25rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.secret-btn:hover {
+  background-color: var(--dark-brown);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+/* Add these to your existing style.css */
+.secret-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 450px;
+  border: 1px solid var(--accent-brown);
+}
+
+.secret-input {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--accent-brown);
+  color: white;
+  padding: 12px 15px;
+  border-radius: 8px;
+}
+
+.secret-input:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: var(--light-brown);
+  color: white;
+  box-shadow: 0 0 0 0.25rem rgba(161, 136, 127, 0.25);
+}
+
+.text-cream {
+  color: var(--cream);
+  text-decoration: none;
+}
+
+.text-cream:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .secret-card {
+    padding: 2rem 1.5rem !important;
+  }
+}
+/* Django Form Styling */
+.secret-form-fields p {
+  margin-bottom: 1rem;
+}
+
+.secret-form-fields label {
+  display: block;
+  color: var(--cream);
+  margin-bottom: 0.5rem;
+}
+
+.secret-form-fields input {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--accent-brown);
+  color: white;
+  padding: 12px 15px;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.secret-form-fields input:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: var(--light-brown);
+  color: white;
+  box-shadow: 0 0 0 0.25rem rgba(161, 136, 127, 0.25);
+}
+
+/* Error message styling */
+.secret-form-fields .errorlist {
+  color: #ff6b6b;
+  padding-left: 0;
+  list-style: none;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+/* ================ */
+/* COLOR VARIABLES  */
+/* ================ */
+:root {
+    --primary-brown: #5D4037;
+    --light-brown: #8D6E63;
+    --dark-brown: #3E2723;
+    --accent-brown: #A1887F;
+    --cream: #EFEBE9;
+    --error-red: #FF6B6B;
+}
+
+/* ================ */
+/* BASE STYLES      */
+/* ================ */
+.secret-bg {
+    background-color: var(--primary-brown);
+    min-height: 100vh;
+    padding: 2rem 0;
+}
+
+/* ================ */
+/* CARD STYLES      */
+/* ================ */
+.secret-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    border: 1px solid var(--accent-brown);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* ================ */
+/* TYPOGRAPHY       */
+/* ================ */
+.secret-heading {
+    color: var(--cream);
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.text-cream {
+    color: var(--cream);
+    opacity: 0.9;
+}
+
+.text-cream:hover {
+    color: white;
+    opacity: 1;
+}
+
+/* ================ */
+/* FORM ELEMENTS    */
+/* ================ */
+.secret-input {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid var(--accent-brown) !important;
+    color: white !important;
+}
+
+.secret-input:focus {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    border-color: var(--light-brown) !important;
+    color: white !important;
+    box-shadow: 0 0 0 0.25rem rgba(161, 136, 127, 0.25) !important;
+}
+
+/* ================ */
+/* BUTTON STYLES    */
+/* ================ */
+.secret-btn {
+    background-color: var(--light-brown);
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.secret-btn:hover {
+    background-color: var(--dark-brown);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ================ */
+/* RESPONSIVE       */
+/* ================ */
+@media (max-width: 768px) {
+    .secret-heading {
+        font-size: 2rem;
+    }
+    
+    .secret-card {
+        padding: 2rem !important;
+    }
+}
+.secret-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.text-cream {
+    color: #f8f9fa !important;
+}
+
+.btn-outline-cream {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-cream:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+

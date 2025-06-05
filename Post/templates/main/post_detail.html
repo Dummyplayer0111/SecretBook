@@ -1,0 +1,34 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="secret-bg d-flex flex-column align-items-center py-5 min-vh-100">
+    <div class="container d-flex flex-column align-items-center">
+        <div class="secret-card p-4 p-md-5 w-100" style="max-width: 700px;">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+                <h2 class="text-cream mb-0">{{ post.title }}</h2>
+                {% if request.user == post.author %}
+                    <div class="d-flex gap-2">
+                        <a class="btn btn-outline-cream" href="{% url 'post_edit' pn=post.pk %}" title="Edit">
+                            {% include './icons/pencil-fill.svg' %}
+                        </a>
+                        <a class="btn btn-outline-cream" href="{% url 'delete' pn=post.pk %}" title="Delete">
+                            {% include './icons/delete.svg' %}
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+            {% if post.created_date %}
+                <p class="text-cream small mb-4">
+                    Published: {{ post.created_date|date:"F j, Y – g:i a" }}
+                </p>
+            {% endif %}
+
+            <p class="text-cream fs-5">
+                {{ post.text|linebreaks }}
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
