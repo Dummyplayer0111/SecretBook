@@ -49,5 +49,5 @@ def post_deleted(request, pk):
     post = get_object_or_404(Post, pk = pk)
     if post.author == request.user:
         post.delete()
-        return render(request, 'main/post_deleted.html', {'pn':pk})
+        return render(request, 'main/post_deleted.html', {'pk':pk})
     
