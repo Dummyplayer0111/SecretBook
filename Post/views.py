@@ -13,21 +13,21 @@ def new_post(request):
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
-            return redirect('post_detail', pk = post.pk)
+            return redirect('post_detail', uuid = post.uuid)
     else:
         form = PostForm()
         return render(request, 'main/new_post_form.html', {'form': form})
         
         
 @login_required(login_url = '/login/')
-def post_detail(request, pk):
-    post = get_object_or_404(Post, pk = pk)
+def post_detail(request, uuid):
+    post = get_object_or_404(Post, uuid = uuid)
     return render(request, 'main/post_detail.html', {'post': post})
     
     
 @login_required(login_url='/login/')
-def post_edit(request, pk):
-    post = get_object_or_404(Post, pk = pk)
+def post_edit(request, uuid):
+    post = get_object_or_404(Post, uuid = uuid)
     if request.method == 'POST' and request.user == post.author:
         form = PostForm(request.POST, instance = post)
         if form.is_valid():
@@ -35,7 +35,7 @@ def post_edit(request, pk):
             post.author = request.user
             post.created_date = timezone.now()
             post.save()
-            return redirect('post_detail', pk = post.pk)
+            return redirect('post_detail', uuid = post.uuid)
     elif request.user == post.author:
         form = PostForm(instance=post)
         return render(request, 'main/new_post_form.html', {'form': form})
@@ -45,9 +45,9 @@ def feed(request):
     posts = Post.objects.all().order_by('created_date')
     return render(request, 'main/feed.html', {'posts':posts})
     
-def post_deleted(request, pk):
-    post = get_object_or_404(Post, pk = pk)
+def post_deleted(request, uuid):
+    post = get_object_or_404(Post, uuid = uuid)
     if post.author == request.user:
         post.delete()
-        return render(request, 'main/post_deleted.html', {'pk':pk})
+        return render(request, 'main/post_deleted.html', {'uuid':uuid})
     
