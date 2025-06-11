@@ -9,10 +9,10 @@
                 <h2 class="text-cream mb-0">{{ post.title }}</h2>
                 {% if request.user == post.author %}
                     <div class="d-flex gap-2">
-                        <a class="btn btn-outline-cream" href="{% url 'post_edit' uuid=post.uuid %}" title="Edit">
+                        <a class="btn btn-outline-cream" href="{% url 'post_edit' pk=post.pk %}" title="Edit">
                             {% include './icons/pencil-fill.svg' %}
                         </a>
-                        <a class="btn btn-outline-cream" href="{% url 'delete' uuid=post.uuid %}" title="Delete">
+                        <a class="btn btn-outline-cream" href="{% url 'delete' pk=post.pk %}" title="Delete">
                             {% include './icons/delete.svg' %}
                         </a>
                     </div>
