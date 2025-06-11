@@ -8,7 +8,8 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     text = models.TextField()
     created_date = models.DateTimeField(default = timezone.now)
-    uid = models.UUIDField(default=uuid.uuid4, unique=True)
+    uuid = models.UUIDField(null=True, blank=True, unique=True, editable=False)
+
 
 
 
