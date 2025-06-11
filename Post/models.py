@@ -8,12 +8,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     text = models.TextField()
     created_date = models.DateTimeField(default = timezone.now)
-    uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True, null=True)
-
-
-
-
- 
+    uuid = models.UUIDField(unique=True, null=True, blank=True, editable=False)
 
     def __str__(self):
         return self.title   
