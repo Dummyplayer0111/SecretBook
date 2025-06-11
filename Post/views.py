@@ -35,7 +35,7 @@ def post_edit(request, pk):
             post.author = request.user
             post.created_date = timezone.now()
             post.save()
-            return redirect('post_detail', uuid = post.pk)
+            return redirect('post_detail', pk = post.pk)
     elif request.user == post.author:
         form = PostForm(instance=post)
         return render(request, 'main/new_post_form.html', {'form': form})
