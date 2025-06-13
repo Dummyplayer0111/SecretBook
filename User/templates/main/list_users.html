@@ -1,41 +1,98 @@
-{% load static %}
+{%load static%}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="basic">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>All Users - Secretbook</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Users</title>
+    <style>
+        .basic
+        {
+            width : 100%;
+            height : 100%;
+            display : flex;
+            align-items : center;
+            justify-content : center;
+            background-color: rgb(93, 64, 55);
+        }
+        .Out
+        {
+            display: flex;
+            flex-direction: column;
+            color: white;
+            font-family: Karla;
+        }
+        .heading
+        {
+            margin :0;
+            padding : 20px 20px 5px 20px;
+            font-weight : 500;
+            cursor : pointer;
+            font-size: 50px;
+            flex:1;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .sub-head
+        {
+            margin : 1px 0px 20px 0;
+            padding : 0 4px 4px 4px;
+            font-weight : 300;
+            font-size : 30px;
+            cursor : pointer;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+        }
+
+
+        .users
+        {
+            background-color: rgba(255, 255, 255, 0.7);            
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            padding: 10px 0;
+        }
+        .user
+        {
+            background-color: rgb(93, 64, 55);
+            display: flex;
+            padding: 10px 7px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            margin :0.25px 0;
+        }
+        @media(max-width:600px)
+        {
+            .sub-head{font-size:15px}
+            .heading{font-size: 30px}
+        }
+    </style>
 </head>
-<body class="secret-bg">
-  <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
-    <div class="text-center mb-4">
-      <h1 class="secret-heading">Secretbook Users</h1>
-      <p class="text-cream">Browse all registered users</p>
+<main class="Out">
+    <div class="heading">Secretbook users</div>
+    <div class="sub-head">Browse all registered users!</div>
+    {%if users%}
+        <div class="users">
+            {% for user in users %}
+                <div class="user">
+                    <div style="flex:2;font-size: 25px;padding:6px 20px;margin: 4px 40px;white-space: nowrap;">{{ user.username }}</div>
+                    <div style="flex:1;margin:4px 40px;font-size:13px;display: flex;align-items: center;">{{ user.email }}</div>
+                </div>
+            {% endfor %}   
+        </div>
+    {%endif%}
+    <div>
+        <a>
+            <img src=""
+        </a>
     </div>
-
-    <div class="secret-card p-4 w-100" style="max-width: 600px;">
-      {% if users %}
-        <ul class="list-group list-group-flush">
-          {% for user in users %}
-            <li class="list-group-item bg-transparent text-light d-flex justify-content-between align-items-center">
-              <span>{{ user.username }}</span>
-              <small class="text-muted">{{ user.email }}</small>
-            </li>
-          {% endfor %}
-        </ul>
-      {% else %}
-        <p class="text-center text-light">No users found.</p>
-      {% endif %}
-    </div>
-
-    <div class="text-center mt-4">
-      <a href="{% url 'home' %}" class="btn secret-btn secret-btn-signup">Back to Home</a>
-    </div>
-  </div>
-</body>
-
+</main>
 </html>
-

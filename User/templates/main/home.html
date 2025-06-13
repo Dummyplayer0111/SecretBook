@@ -1,38 +1,32 @@
-{% load static %}
+{%load static%}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="basic">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Secretbook</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body class="secret-bg">
-  <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
-    <div class="text-center mb-5">
-      <a href="{% url 'home' %}" class="text-decoration-none">
-        <h1 class="secret-heading mb-3">Secretbook</h1>
-      </a>
-      <p class="text-cream lead">Only your friends know what goes on here!</p>
-    </div>
-    
-    <!-- Centered buttons container -->
-    <div class="d-flex flex-column flex-md-row gap-3 justify-content-center w-100 px-3" style="max-width: 400px;">
-      <a href="{% url 'login' %}" class="btn secret-btn secret-btn-action">
-        <i class="fas fa-sign-in-alt me-2"></i> Login
-      </a>
-      <a href="{% url 'signup' %}" class="btn secret-btn secret-btn-action">
-        <i class="fas fa-user-plus me-2"></i> Sign Up
-      </a>
-    </div>
-  </div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Secretbook</title>
+</head>
+<body>
+    <main class="Box">
+        <h1 class="heading">Secretbook</h1>
+        <p class="sub-head"> Only your friends know what goes on here!</p>
+        <div class="Inner-container">
+            <a class="Login-box" href="{% url 'login' %}">
+            <img src="{% static 'images/sign-in.svg' %}" alt="SVG Image" color:white>
+            <div class="ft">Login</div>
+            </a>
+            <a class="Login-box" href="{% url 'signup' %}">
+            <img src="{% static 'images/user.png' %}" alt="SVG Image" color:white>
+            <div class="ft">Sign Up</div>
+            </a>
+        </div>
+    </main>
+    
 </body>
-</html>
+</html> 
