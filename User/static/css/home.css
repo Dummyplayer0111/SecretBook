@@ -153,4 +153,8 @@ img {
   .sub-head {
     font-size: 10px;
   }
+
+  .Box{
+    padding: 50px 50px;
+  }
 }
