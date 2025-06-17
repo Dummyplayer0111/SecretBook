@@ -1,32 +1,37 @@
 {%load static%}
 <!DOCTYPE html>
 <html lang="en" class="basic">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
 
     <title>Secretbook</title>
 </head>
+
 <body>
     <main class="Box">
-        <h1 class="heading">Secretbook</h1>
+        <a href="{% url 'home' %}" class="text-decoration-none">
+            <h1 class="heading">Secretbook</h1>
+        </a>
         <p class="sub-head"> Only your friends know what goes on here!</p>
         <div class="Inner-container">
             <a class="Login-box" href="{% url 'login' %}">
-            <img src="{% static 'images/sign-in.svg' %}" alt="SVG Image" color:white>
-            <div class="ft">Login</div>
+                <img src="{% static 'images/sign-in.svg' %}" alt="SVG Image" color:white>
+                <div class="ft">Login</div>
             </a>
             <a class="Login-box" href="{% url 'signup' %}">
-            <img src="{% static 'images/user.png' %}" alt="SVG Image" color:white>
-            <div class="ft">Sign Up</div>
+                <img src="{% static 'images/user.png' %}" alt="SVG Image" color:white>
+                <div class="ft">Sign Up</div>
             </a>
         </div>
     </main>
-    
+
 </body>
-</html> 
+
+</html>

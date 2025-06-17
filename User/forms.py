@@ -5,11 +5,10 @@ from django.core.exceptions import ValidationError
 
 class CustomUserCreationForm(UserCreationForm): 
 
-    username = forms.CharField(label = 'Username', min_length = 5 , max_length = 150)  
+    username = forms.CharField(label = 'Username', min_length = 5 , max_length = 40)  
     email = forms.EmailField(label = 'E-mail')  
     password1 = forms.CharField(label = 'Password', widget = forms.PasswordInput)  
     password2 = forms.CharField(label = 'Confirm Password', widget = forms.PasswordInput)   
-  
     def clean_email(self):  
         email = (self.cleaned_data.get('email', '')).lower()
         new = User.objects.filter(email = email)  
@@ -34,7 +33,7 @@ class CustomUserCreationForm(UserCreationForm):
         return user
         
 class User_edit(forms.ModelForm):
-    username = forms.CharField(label = 'Username', min_length = 5 , max_length = 150)  
+    username = forms.CharField(label = 'Username', min_length = 5 , max_length = 40)  
     email = forms.EmailField(label = 'E-mail') 
     class Meta:
         model = User

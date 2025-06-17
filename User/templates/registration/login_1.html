@@ -5,7 +5,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap"
     rel="stylesheet">
-<link rel="stylesheet" href="{% static 'css/login.css' %}">
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">
 
 <head>
     <meta charset="UTF-8">
@@ -26,13 +26,6 @@
         </div>
         <form method="post" class="inbox">
             {% csrf_token %}
-
-            {% if form.non_field_errors %}
-            <div class="error-msg">
-                {{ form.non_field_errors }}
-            </div>
-            {% endif %}
-
             <div class="field-box">
                 <label class="box-text" for="id_username">Username:</label>
                 <input type="text" name="username" required id="id_username"
@@ -43,25 +36,44 @@
                 </div>
                 {% endif %}
             </div>
-
             <div class="field-box">
-                <label for="id_password" class="box-text">Enter password:</label>
-                <input type="password" name="password" required id="id_password"
-                    class="in-text {% if form.password.errors %}error-field{% endif %}">
-                {% if form.password.errors %}
+                <label for="id_email" class="box-text">E-mail:</label>
+                <input type="email" name="email" required id="id_email"
+                    class="in-text {% if form.email.errors %}error-field{% endif %}">
+                {% if form.email.errors %}
                 <div class="error-msg">
-                    {{ form.password.errors.0 }}
+                    {{ form.email.errors.0 }}
                 </div>
                 {% endif %}
             </div>
 
-            <div class="field-box-2">
-                <button type="submit" class="submit-btn">Login</button>
+            <div class="field-box">
+                <label for="id_p1" class="box-text">Enter password:</label>
+                <input type="password" name="password1" required id="id_p1"
+                    class="in-text {% if form.password1.errors %}error-field{% endif %}">
+                {% if form.password1.errors %}
+                <div class="error-msg">
+                    {{ form.password1.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="field-box">
+                <label for="id_p2" class="box-text">Re-enter password:</label>
+                <input type="password" name="password2" required id="id_p2"
+                    class="in-text {% if form.password2.errors %}error-field{% endif %}">
+                {% if form.password2.errors %}
+                <div class="error-msg">
+                    {{ form.password2.errors.0 }}
+                </div>
+                {% endif %}
+            </div>
+            <div class="field-box">
+                <button type="submit" class="submit-btn">Sign up</button>
             </div>
 
         </form>
-        <p class="link">New? <a href="/signup">Sign Up</a></p>
-        <p class="link">Forgot password? <a href="/password_reset ">Request link</a></p>
+        <p class="link">Have an account? <a href="/profile">Login</a></p>
     </section>
 </body>
 

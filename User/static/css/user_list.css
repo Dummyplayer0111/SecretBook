@@ -1,8 +1,198 @@
-.basic
-{
-  width : 100%;
-  height : 100%;
-  display : flex;
-  align-items : center;
-  justify-content : center;
+.basic {
+  background-color: rgb(93, 64, 55);
+  padding: 50px 30px;
+}
+
+.Out {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-family: Karla;
+}
+
+.heading {
+  margin: 0;
+  padding: 20px 20px 5px 20px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 50px;
+  flex: 1;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  color: white;
+  justify-content: center;
+}
+
+
+.text-decoration-none{
+  text-decoration: none;
+}
+
+.sub-head {
+  margin: 1px 0px 20px 0;
+  padding: 0 4px 4px 4px;
+  font-weight: 300;
+  font-size: 30px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+
+.users {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+.user {
+  background-color: rgb(93, 64, 55);
+  display: flex;
+  padding: 10px 7px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  margin: 0.25px 0;
+  flex-direction: row;
+}
+
+.username {
+  flex: 2;
+  font-size: 25px;
+  padding: 6px 20px;
+  margin: 4px 40px;
+  white-space: nowrap;
+}
+
+.email {
+  flex: 1;
+  margin: 4px 40px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+}
+
+.image-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+}
+
+img {
+  width: 40px;
+
+}
+
+img:hover {
+  width: 45px
+}
+
+@media(min-width:1000px) and (max-width:1500px) {
+  .sub-head {
+    font-size: 15px
+  }
+
+  .heading {
+    font-size: 30px
+  }
+
+  .username {
+    font-size: 15px;
+    padding: 3px 10px;
+    margin: 2px 20px;
+  }
+
+  .email {
+    font-size: 10px;
+    margin: 2px 20px
+  }
+
+}
+
+
+@media(min-width:750px) and (max-width:1000px) {
+  .sub-head {
+    font-size: 10px
+  }
+
+  .heading {
+    font-size: 25px
+  }
+
+  .username {
+    font-size: 11px;
+    padding: 1px 5px;
+    margin: 1px 15px;
+  }
+
+  .email {
+    font-size: 9px;
+    margin: 1px 15px
+  }
+
+}
+
+@media(min-width:500px) and (max-width:750px) {
+  .sub-head {
+    font-size: 7px
+  }
+
+  .heading {
+    font-size: 15px
+  }
+
+  .username {
+    font-size: 15px;
+    padding: 1px 5px;
+    margin: 1px 15px;
+    flex: 2
+  }
+
+  .email {
+    font-size: 10px;
+    margin: 5px 15px;
+    padding: 1px 5px;
+    flex: 1;
+  }
+
+  .user {
+    flex-direction: column;
+  }
+}
+
+@media(max-width:500px) {
+  .sub-head {
+    font-size: 7px
+  }
+
+  .heading {
+    font-size: 15px
+  }
+
+  .username {
+    font-size: 15px;
+    padding: 1px 5px;
+    margin: 1px 15px;
+    flex: 2
+  }
+
+  .email {
+    font-size: 10px;
+    margin: 5px 15px;
+    padding: 1px 5px;
+    flex: 1;
+  }
+
+  .user {
+    flex-direction: column;
+  }
+
+  .username {
+    overflow-wrap: break-word;
+    white-space: normal;
+  }
 }
