@@ -190,7 +190,9 @@ img:hover {
     font-size: 15px;
     padding: 1px 5px;
     margin: 1px 15px;
-    flex: 2
+    flex: 2;
+    overflow-wrap: break-word;
+    white-space: normal;
   }
 
   .email {
@@ -202,10 +204,5 @@ img:hover {
 
   .user {
     flex-direction: column;
-  }
-
-  .username {
-    overflow-wrap: break-word;
-    white-space: normal;
   }
 }
