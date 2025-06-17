@@ -1,6 +1,8 @@
 .basic {
   background-color: rgb(93, 64, 55);
-  padding: 50px 30px;
+  padding: 50px 50px;
+  height: 100vh;
+  box-sizing: border-box;
 }
 
 .Out {
@@ -8,6 +10,9 @@
   flex-direction: column;
   color: white;
   font-family: Karla;
+  height: 90%;
+  width: 90%;
+  box-sizing: border-box;
 }
 
 .heading {
@@ -24,8 +29,16 @@
   justify-content: center;
 }
 
+body {
+  width:100%;
+  margin: 0;
+  display: flex;
+  place-content: center;
+  flex: 1;
+  justify-content: space-around;
+}
 
-.text-decoration-none{
+.text-decoration-none {
   text-decoration: none;
 }
 
