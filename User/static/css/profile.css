@@ -1,6 +1,9 @@
 * {
     box-sizing: border-box;
 }
+html{
+    padding-top: 15vh;
+}
 
 .navbar {
     display: flex;
@@ -10,8 +13,8 @@
     right: 0;
     background-color: rgb(62 39 25);
     height: 15vh;
-    top: auto;
     box-sizing: content-box;
+    z-index: 1;
 }
 
 .heading {
@@ -98,7 +101,7 @@
 }
 
 body {
-    padding-top: 15vh;
+
     margin: 0;
     font-family: Karla, Arial;
 }
