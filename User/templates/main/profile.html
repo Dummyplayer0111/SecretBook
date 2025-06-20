@@ -16,7 +16,8 @@
 </head>
 
 <body>
-    <nav class="{% if request.user_agent.is_mobile or request.is_tablet %}navbar-1{% else %}navbar-2{% endif %}">
+    <nav class="{% if request.is_mobile or request.is_tablet %}navbar-1{% else %}navbar-2{% endif %}">
+
         <div class="no-id-1">
             <div class="no-id-2">
                 <a href="{% url 'home' %}" class="text-decoration-none">
