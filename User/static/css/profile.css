@@ -10,6 +10,7 @@
     right: 0;
     bottom: 85vh;
     background-color: rgb(62 39 25);
+    min-height: 15vh;
 }
 
 .heading {
