@@ -2,17 +2,26 @@
     box-sizing: border-box;
 }
 
-.navbar {
+.navbar-1 {
     display: flex;
-    position: fixed;
+    position: sticky;
     bottom: 85vh;
-    left: 0;    
+    left: 0;
     right: 0;
     background-color: rgb(62 39 25);
     height: 15vh;
     box-sizing: content-box;
 }
 
+.navbar-2{
+    position: sticky;
+    bottom: 85vh;
+    left: 0;
+    right: 0;
+    background-color: rgb(62 39 25);
+    height: 15vh;
+    box-sizing: content-box;
+}
 .heading {
     color: white;
     margin: 0;
@@ -97,7 +106,6 @@
 }
 
 body {
-    padding-top: 15vh;
     margin: 0;
     font-family: Karla, Arial;
 }
@@ -106,7 +114,7 @@ main {
     background-color: rgb(93, 64, 55);
     width: 100%;
     min-height: 86vh;
-    padding: 0;
+    padding: 0 20px;
     margin: 0;
 }
 
