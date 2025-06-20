@@ -5,11 +5,11 @@
 .navbar {
     display: flex;
     position: fixed;
-    top: 0;
+    bottom: 85vh;
     left: 0;
     right: 0;
     background-color: rgb(62 39 25);
-    min-height: 15vh;
+    height: 15vh;
 }
 
 .heading {
