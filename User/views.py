@@ -3,6 +3,8 @@ from .forms import CustomUserCreationForm,User_edit
 from Post.models import Post
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.auth import logout
+
 
 def welcome(request):
     if request.user.is_authenticated:
@@ -52,6 +54,7 @@ def del_user(request):
     user.delete()
     return redirect('signup')
     
+
 
         
 

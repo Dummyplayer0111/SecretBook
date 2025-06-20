@@ -18,7 +18,7 @@
         <a href="{% url 'home' %}" class="text-decoration-none">
             <h1 class="heading">Secretbook</h1>
         </a>
-        <p class="sub-head"> Only your friends know what goes on here!</p>
+        <p class="sub-head">Only your friends know what goes on here!</p>
     </main>
     <section class="xbox">
         <div class="ed-box">
@@ -36,7 +36,7 @@
             <div class="field-box">
                 <label class="box-text" for="id_username">Username:</label>
                 <input type="text" name="username" required id="id_username"
-                    class="in-text {% if form.username.errors %}error-field{% endif %}">
+                    class="in-text {% if form.username.errors %}error-field{% endif %}  {% if form.non_field_errors %} error-width{% endif %}">
                 {% if form.username.errors %}
                 <div class="error-msg">
                     {{ form.username.errors.0 }}

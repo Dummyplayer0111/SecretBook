@@ -1,7 +1,7 @@
 <style>
 .logoutbutton{background-color:rgb(141, 11, 11);color: white;border-radius: 10px;height: 30px;width: 95px;border-style:groove;cursor:pointer}
 </style>
-<div class="container d-flex justify-content-center mt-5">
+<div>
   <form method="post" action="{% url 'logout' %}">
     {% csrf_token %}
     <input type="hidden" name="next" value="{% url 'home' %}" />

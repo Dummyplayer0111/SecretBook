@@ -9,9 +9,7 @@
     padding-bottom: 3%;
 }
 
-.text-decoration-none {
-    text-decoration: none;
-}
+
 
 .ed-box {
     flex: 1;
@@ -26,8 +24,8 @@
 .error-msg {
     color: #ff6b6b;
     font-size: 14px;
-    margin-top: 5px;
-
+    margin: 0;
+    text-align: center;
 }
 
 
@@ -51,7 +49,6 @@
     cursor: pointer;
     font-size: 80px;
     color: white;
-    margin-top: 25px;
 }
 
 .heading-2 {
@@ -90,14 +87,18 @@
     background-color: rgba(255, 255, 255, 0.25);
     width: 95%;
     margin: 0 2.72%;
-
+    padding: 15px 0;
 }
 
 .inbox {
     display: flex;
     flex-direction: column;
-    padding: 0 0 3% 0;
+    padding: 0;
     flex: 2;
+}
+
+.text-decoration-none{
+    text-decoration: none;
 }
 
 .field-box {
@@ -107,7 +108,18 @@
     align-items: center;
     justify-content: space-between;
     text-align: center;
-    padding: 5% 0;
+    padding: 5%;
+    font-size: 20px
+}
+.field-box-2 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    padding: 5% 0 0 0;
+    text-decoration: none;
 }
 
 .submit-btn {
@@ -133,20 +145,21 @@
 }
 
 .box-text {
-    font-size: 35px;
+    font-size: 25px;
     font-family: Karla, Arial;
+    margin: 25px 0;
 }
 
 .in-text {
     font-size: 25px;
     font-family: Karla, Arial;
-    flex:1
+    flex: 1;
+    width: 90%;
 }
 
 
 .link {
-    margin-bottom: 5px;
-    margin-top: 0;
+    margin-bottom: 3px;
     font-size: medium;
 }
 
@@ -173,12 +186,9 @@ body {
     }
 
     .heading-2 {
-        font-size: 50px;
+        font-size: 45px;
     }
 
-    .box-text {
-        font-size: 30px;
-    }
 
     .in-text {
         font-size: 23px;
@@ -201,9 +211,6 @@ body {
         font-size: 40px;
     }
 
-    .box-text {
-        font-size: 25px;
-    }
 
     .in-text {
         font-size: 18px;
@@ -224,10 +231,6 @@ body {
 
     .heading-2 {
         font-size: 35px;
-    }
-
-    .box-text {
-        font-size: 22px;
     }
 
     .in-text {
@@ -260,10 +263,6 @@ body {
         font-size: 30px;
     }
 
-    .box-text {
-        font-size: 20px;
-    }
-
     .in-text {
         font-size: 13px;
     }
@@ -278,7 +277,7 @@ body {
     }
 }
 
-@media (min-width:470px) and (max-width:780px) {
+@media (min-width:510px) and (max-width:780px) {
     .heading {
         font-size: 50px;
         margin-bottom: 0px;
@@ -292,9 +291,6 @@ body {
         font-size: 30px;
     }
 
-    .box-text {
-        font-size: 20px;
-    }
 
     .in-text {
         font-size: 13px;
@@ -307,7 +303,7 @@ body {
     }
 }
 
-@media (max-width:470px) {
+@media (max-width:510px) {
     .heading {
         font-size: 50px;
         margin-bottom: 0px;
@@ -321,9 +317,7 @@ body {
         font-size: 30px;
     }
 
-    .box-text {
-        font-size: 20px;
-    }
+
 
     .in-text {
         font-size: 13px;

@@ -25,9 +25,10 @@
 
 .error-msg {
     color: #ff6b6b;
-    font-size: 14px;
-    margin-top: 5px;
-
+    font-size: 20px;
+    padding-bottom: 5px;
+    margin: 0;
+    text-align: center;
 }
 
 
@@ -49,9 +50,9 @@
     padding: 4px;
     font-weight: 700;
     cursor: pointer;
-    font-size: 80px;
+    font-size: 70px;
     color: white;
-    margin-top: 25px;
+    margin-top: 20px;
 }
 
 .heading-2 {
@@ -90,13 +91,18 @@
     background-color: rgba(255, 255, 255, 0.25);
     width: 95%;
     margin: 0 2.72%;
+    padding: 0;
+}
 
+.box-text-2 {
+    font-size: 25px;
+    text-align: start;
 }
 
 .inbox {
     display: flex;
     flex-direction: column;
-    padding: 0 0 3% 0;
+    padding: 0;
     flex: 2;
 }
 
@@ -105,17 +111,45 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
     text-align: center;
-    padding: 5% 0;
+    margin: 10px 0;
+    padding: 5px 0;
 }
+
+.field-box-2 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 10px 0;
+    padding: 5px 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+
+
+.field-box-3 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 10px 0;
+    padding: 5px 0;
+    padding-top: 0;
+    margin-top: 0;
+}
+
 
 .submit-btn {
     font-size: 20px;
     background-color: rgba(255, 255, 255, 0.3);
     border-radius: 7px;
     color: white;
-    border: 2px solid white;
+    border: 2px solid white;margin-bottom: 10px;
+
 }
 
 .submit-btn:hover {
@@ -130,38 +164,50 @@
 
 .error-field {
     border: 2px solid darkred;
-}
+}   
 
 .box-text {
     font-size: 35px;
     font-family: Karla, Arial;
+    margin: 0;
+}
+
+.infb {
+    margin: 0;
+    padding-left: 20px;
 }
 
 .in-text {
     font-size: 25px;
     font-family: Karla, Arial;
-    flex:1
+    width: 50%;
 }
 
 
 .link {
-    margin-bottom: 5px;
-    margin-top: 0;
-    font-size: medium;
+    margin-bottom: 3px;
+    font-size: x-large;
+    padding-bottom: 7px;
 }
 
 body {
-    width: 80%;
+    width: 70%;
     display: grid;
-    grid-template-columns: 40%;
+    grid-template-columns: 90%;
     place-content: center;
     height: 80%;
     margin: 0;
 }
 
 
+.helptext{
+    flex:1;
+    margin: 10px 0;
+}
 
-@media(min-width:1140px) and (max-width:1350px) {
+
+
+@media(min-width:1140px) and (max-width:1450px) {
 
     .heading {
         font-size: 70px;
@@ -178,6 +224,16 @@ body {
 
     .box-text {
         font-size: 30px;
+    }
+
+
+    .box-text-2,
+    .helptext {
+        font-size: 19px
+    }
+    body {
+        width: 100%;
+        grid-template-columns: 70%;
     }
 
     .in-text {
@@ -205,10 +261,19 @@ body {
         font-size: 25px;
     }
 
+    .box-text-2,
+    .helptext {
+        font-size: 17px
+    }
+
     .in-text {
         font-size: 18px;
     }
 
+    body {
+        width: 100%;
+        grid-template-columns: 70%;
+    }
 }
 
 @media(min-width:900px) and (max-width:1020px) {
@@ -238,10 +303,13 @@ body {
         height: 150px;
     }
 
+    .box-text-2,
+    .helptext {
+        font-size: 15px
+    }
     body {
-        width: 50%;
-
-        grid-template-columns: 80%
+        width: 100%;
+        grid-template-columns: 70%;
     }
 
 }
@@ -273,12 +341,17 @@ body {
     }
 
     body {
-        width: 50%;
-        grid-template-columns: 100%
+        width: 100%;
+        grid-template-columns: 70%;
+    }
+
+    .box-text-2,
+    .helptext {
+        font-size: 15px
     }
 }
 
-@media (min-width:470px) and (max-width:780px) {
+@media (min-width:540px) and (max-width:780px) {
     .heading {
         font-size: 50px;
         margin-bottom: 0px;
@@ -301,24 +374,29 @@ body {
     }
 
     body {
-        width: 60%;
+        width: 100%;
+        grid-template-columns: 100%;
+    }
 
-        grid-template-columns: 100%
+
+    .box-text-2,
+    .helptext {
+        font-size: 15px
     }
 }
 
-@media (max-width:470px) {
+@media (min-width:400px) and (max-width:540px) {
     .heading {
-        font-size: 50px;
+        font-size: 30px;
         margin-bottom: 0px;
     }
 
     .sub-head {
-        font-size: 10px;
+        font-size: 8px;
     }
 
     .heading-2 {
-        font-size: 30px;
+        font-size: 27px;
     }
 
     .box-text {
@@ -326,12 +404,69 @@ body {
     }
 
     .in-text {
-        font-size: 13px;
+        font-size: 10px;
     }
 
     body {
-        width: 80%;
+        width: 100%;
+        grid-template-columns: 100%;
+    }
 
-        grid-template-columns: 100%
+
+    .error-msg {
+        font-size: 15px;
+    }
+
+    .link {
+        font-size: 15px;
+    }
+
+    .box-text-2,
+    .helptext {
+        font-size: 15px
+    }
+}
+
+
+@media (max-width:400px) {
+
+    .heading {
+        font-size: 25px;
+        margin-bottom: 0px;
+    }
+
+    .sub-head {
+        font-size: 8px;
+    }
+
+    .heading-2 {
+        font-size: 23px;
+    }
+
+    .box-text {
+        font-size: 20px;
+    }
+
+    .in-text {
+        font-size: 8px;
+    }
+
+    body {
+        width: 100%;
+        grid-template-columns: 100%;
+    }
+
+
+    .error-msg {
+        font-size: 15px
+    }
+
+    .link {
+        font-size: 15px;
+    }
+
+    .box-text-2,
+    .helptext {
+        font-size: 15px
     }
 }
