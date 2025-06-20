@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <nav class="{% if is_mobile %}navbar-1{% else %}navbar-2{% endif %} ">
+    <nav class="{% if request.is_ios_device or request.is_android_device %}navbar-1{% else %}navbar-2{% endif %}">
         <div class="no-id-1">
             <div class="no-id-2">
                 <a href="{% url 'home' %}" class="text-decoration-none">
