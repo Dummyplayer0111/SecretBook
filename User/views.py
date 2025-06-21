@@ -11,7 +11,7 @@ def welcome(request):
         return redirect('profile')
     else:
         return render(request , 'main/home.html', {})
-    
+
 def signup(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -21,13 +21,13 @@ def signup(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'main/signup.html',{'form': form})
-        
+
 @login_required(login_url = '/login/')
 def profile_view(request):
     posts = Post.objects.filter(author = request.user).order_by('created_date')
     return render(request, 'main/profile.html', {'posts': posts})
- 
- 
+
+
 @login_required(login_url = '/login/')
 def profile_edit(request):
     if request.method == 'POST':
@@ -43,20 +43,28 @@ def profile_edit(request):
 def user_list(request):
     all = User.objects.all()
     return render(request, 'main/list_users.html', {'users':all})
-    
+
 
 @login_required(login_url = '/login/')
 def del_user(request):
-    user = request.user 
+    user = request.user
     posts = Post.objects.filter(author = request.user)
     for post in posts:
         post.delete()
     user.delete()
     return redirect('signup')
-    
+
+def test_user_agent(request):
+    print("UA header:", request.META.get("HTTP_USER_AGENT"))
+    print("Is mobile:", request.user_agent.is_mobile)
+    print("Is tablet:", request.user_agent.is_tablet)
+    print("Is PC:", request.user_agent.is_pc)
+    return render(request, "main/test.html", {})
 
 
-        
+
+
+
 
 
 

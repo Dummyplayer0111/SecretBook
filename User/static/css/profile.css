@@ -1,27 +1,33 @@
-* {
-    box-sizing: border-box;
+html{
+   background-color: rgb(93, 64, 55);
+   height: auto;
+    overflow-x: hidden;
 }
 
+*{
+    box-sizing: border-box;
+}
 .navbar-1 {
     display: flex;
     position: sticky;
-    bottom: 85vh;
+    top: 0;
     left: 0;
     right: 0;
     background-color: rgb(62 39 25);
-    height: 15vh;
+    min-height: 15vh;
     box-sizing: content-box;
+    z-index: 999;
 }
 
 .navbar-2{
     display: flex;
-    position: fixed;
-    bottom: 85vh;
+    top: 0;
     left: 0;
     right: 0;
     background-color: rgb(62 39 25);
-    height: 15vh;
+    min-height: 15vh;
     box-sizing: content-box;
+    position: absolute;
 }
 .heading {
     color: white;
@@ -106,10 +112,20 @@
     border-radius: 10px;
 }
 
-body {
+.body-2 {
     margin: 0;
     font-family: Karla, Arial;
     padding-top: 15vh;
+    height: auto;
+    overflow-x: hidden;
+}
+
+.body-1 {
+    margin: 0;
+    font-family: Karla, Arial;
+    padding-top: 0vh;
+    height: auto;
+    overflow-x: hidden;
 }
 
 main {
@@ -118,6 +134,7 @@ main {
     min-height: 86vh;
     padding: 0 20px;
     margin: 0;
+    box-sizing: border-box;
 }
 
 
@@ -192,7 +209,7 @@ main {
 .logoutbutton {
     background-color: rgb(62 39 25);
     color: white;
-    padding: 45px 15px;
+    padding: 40px 15px;
     white-space: nowrap;
     border: 5px solid rgb(62 39 25);
 }

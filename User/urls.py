@@ -9,4 +9,5 @@ urlpatterns = [
     path('profile/edit/', views.profile_edit, name = 'profile_edit'),
     path('user_list/', views.user_list, name = 'user_list'),
     path('profile/delete/', views.del_user, name = 'delete_acc'),
+    path('ua/',views.test_user_agent),
 ]

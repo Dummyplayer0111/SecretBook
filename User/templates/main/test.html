@@ -1,0 +1,4 @@
+<p>UA: {{ request.META.HTTP_USER_AGENT }}</p>
+<p>Mobile: {{ request.user_agent.is_mobile }}</p>
+<p>Tablet: {{ request.user_agent.is_tablet }}</p>
+<p>PC: {{ request.user_agent.is_pc }}</p>
