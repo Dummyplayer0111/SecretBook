@@ -4,6 +4,7 @@ from Post.models import Post
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
+from django.views.decorators.http import require_http_methods
 
 
 def welcome(request):
@@ -24,7 +25,7 @@ def signup(request):
 
 @login_required(login_url = '/login/')
 def profile_view(request):
-    posts = Post.objects.filter(author = request.user).order_by('created_date')
+    posts = Post.objects.filter(author = request.user).order_by('-created_date')
     return render(request, 'main/profile.html', {'posts': posts})
 
 
@@ -46,12 +47,12 @@ def user_list(request):
 
 
 @login_required(login_url = '/login/')
+@require_http_methods(['GET', 'POST'])
 def del_user(request):
-    user = request.user
-    posts = Post.objects.filter(author = request.user)
-    for post in posts:
-        post.delete()
-    user.delete()
+    if request.method == 'GET':
+        return render(request, 'main/delete_account.html')
+    request.user.delete()
+    logout(request)
     return redirect('signup')
 
 def test_user_agent(request):
@@ -60,7 +61,6 @@ def test_user_agent(request):
     print("Is tablet:", request.user_agent.is_tablet)
     print("Is PC:", request.user_agent.is_pc)
     return render(request, "main/test.html", {})
-
 
 
 

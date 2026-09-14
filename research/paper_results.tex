@@ -1,0 +1,73 @@
+% Generated from saved model_metrics, benchmark_results, secretbook_latency_results, and dataset manifest.
+\newcommand{\FinalN}{76,323}
+\newcommand{\TrainN}{56,422}
+\newcommand{\ValN}{10,022}
+\newcommand{\TestN}{9,879}
+\newcommand{\TestAccuracy}{98.17}
+\newcommand{\CsicAccuracy}{95.72}
+\newcommand{\ValAccuracy}{98.28}
+\newcommand{\FalsePositives}{41}
+\newcommand{\FalseNegatives}{140}
+\newcommand{\TrueNegatives}{4,441}
+\newcommand{\TruePositives}{5,257}
+\newcommand{\XaiCoverage}{100.00}
+\newcommand{\ForwardMean}{0.270}
+\newcommand{\XaiMean}{0.653}
+\newcommand{\HttpMean}{3.435}
+\newcommand{\VocabN}{116}
+\newcommand{\ParameterN}{30,625}
+\newcommand{\SelectedEpoch}{11}
+\newcommand{\EpochsRun}{12}
+\newcommand{\TrainingSeconds}{247.5}
+\newcommand{\Threshold}{0.45}
+\newcommand{\CiLow}{97.88}
+\newcommand{\CiHigh}{98.41}
+\newcommand{\RocAuc}{0.9976}
+\newcommand{\AveragePrecision}{0.9982}
+\newcommand{\Fpr}{0.91}
+\newcommand{\Fnr}{2.59}
+\newcommand{\LoadingMs}{4.145}
+\newcommand{\FirstForward}{1.509}
+\newcommand{\Throughput}{3,445}
+\newcommand{\XaiPninetyfive}{0.814}
+\newcommand{\TopDrop}{11.098}
+\newcommand{\RandomDrop}{1.925}
+\newcommand{\TopWins}{100.00}
+\newcommand{\MarkerMatch}{90.00}
+\newcommand{\SmokeCorrect}{20}
+\newcommand{\SmokeTN}{10}
+\newcommand{\SmokeFP}{0}
+\newcommand{\SmokeFN}{0}
+\newcommand{\SmokeTP}{10}
+\newcommand{\SplitRows}{Train & 30,090 & 26,332 & 56,422\\
+Validation & 4,736 & 5,286 & 10,022\\
+Test & 4,482 & 5,397 & 9,879\\
+\midrule
+Total & 39,308 & 37,015 & 76,323\\}
+\newcommand{\ClassRows}{Normal & 0.9694 & 0.9909 & 0.9800 & 4,482\\
+Attack/anomaly & 0.9923 & 0.9741 & 0.9831 & 5,397\\}
+\newcommand{\SourceRows}{SQLI & 4,468 & 99.80 & 0.9979\\
+XSS & 1,649 & 99.33 & 0.9920\\
+CSIC & 3,762 & 95.72 & 0.9518\\}
+\newcommand{\LatencyRows}{CNN forward & 0.270 & 0.214 & 0.441\\
+Detector incl. encoding & 0.290 & 0.231 & 0.483\\
+Attribution only & 0.653 & 0.623 & 0.814\\
+WAF + trivial view & 0.603 & 0.681 & 1.010\\
+Trivial response only & 0.008 & 0.008 & 0.010\\
+Loopback HTTP & 3.435 & 1.477 & 20.214\\}
+\newcommand{\SecretBookRequests}{700}
+\newcommand{\SecretBookPageMin}{3.006}
+\newcommand{\SecretBookPageMax}{5.284}
+\newcommand{\SecretBookBlockMin}{3.722}
+\newcommand{\SecretBookBlockMax}{4.689}
+\newcommand{\SecretBookForwardMin}{0.307}
+\newcommand{\SecretBookForwardMax}{0.318}
+\newcommand{\SecretBookAttributionMin}{0.741}
+\newcommand{\SecretBookAttributionMax}{0.753}
+\newcommand{\SecretBookRows}{Home (scored) & 200 & 0.664 & 3.006 & 14.481\\
+Login & 200 & 0.901 & 3.314 & 18.942\\
+Signup & 200 & 0.831 & 5.284 & 25.110\\
+Feed redirect & 302 & 0.629 & 3.456 & 16.247\\
+XSS block & 403 & 1.361 & 3.722 & 16.935\\
+SQLi block & 403 & 1.346 & 4.689 & 24.225\\
+Home (bypass) & 200 & 0.306 & 4.029 & 23.749\\}

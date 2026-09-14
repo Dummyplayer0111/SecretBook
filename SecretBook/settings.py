@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast = bool)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,[::1]', cast=lambda value: [host.strip() for host in value.split(',') if host.strip()])
 
 
 # Application definition
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'Post.middleware.AttackDetectionMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django_user_agents.middleware.UserAgentMiddleware',
@@ -52,8 +53,22 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
 ]
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {'class': 'logging.StreamHandler'},
+    },
+    'loggers': {
+        'Post.middleware': {
+            'handlers': ['console'],
+            'level': 'WARNING',
+            'propagate': False,
+        },
+    },
+}
 
 CACHES = {
     'default': {
@@ -136,6 +151,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static_media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = "profile"
+
+# Explainable runtime WAF. Values can be overridden in SecretBook/.env.
+WAF_ATTACK_THRESHOLD = config('WAF_ATTACK_THRESHOLD', default='', cast=lambda value: float(value) if value else None)
+WAF_MAX_BODY_BYTES = config('WAF_MAX_BODY_BYTES', default=16384, cast=int)
+WAF_EXPLAIN_BLOCKS = config('WAF_EXPLAIN_BLOCKS', default=True, cast=bool)
+WAF_EXPOSE_DEBUG_HEADERS = config('WAF_EXPOSE_DEBUG_HEADERS', default=False, cast=bool)
+WAF_SAFE_EMPTY_PATHS = ('/', '/feed/', '/signup/', '/login/', '/profile/', '/user_list/')
 
 
 

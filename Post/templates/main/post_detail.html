@@ -12,9 +12,12 @@
                         <a class="btn btn-outline-cream" href="{% url 'post_edit' pk=post.pk %}" title="Edit">
                             {% include './icons/pencil-fill.svg' %}
                         </a>
-                        <a class="btn btn-outline-cream" href="{% url 'delete' pk=post.pk %}" title="Delete">
-                            {% include './icons/delete.svg' %}
-                        </a>
+                        <form method="post" action="{% url 'delete' pk=post.pk %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-cream" title="Delete" onclick="return confirm('Delete this post?')">
+                                {% include './icons/delete.svg' %}
+                            </button>
+                        </form>
                     </div>
                 {% endif %}
             </div>
@@ -31,4 +34,3 @@
     </div>
 </div>
 {% endblock %}
-

@@ -1,0 +1,5 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Delete account</title></head>
+<body><main><h1>Delete your account?</h1><p>This permanently deletes your account and posts.</p>
+<form method="post">{% csrf_token %}<button type="submit">Delete my account</button></form>
+<a href="{% url 'profile' %}">Keep my account</a></main></body></html>
