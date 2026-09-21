@@ -5,7 +5,7 @@ import numpy as np
 import torch
 from django.contrib.auth.models import User
 from django.http import HttpResponse
-from django.test import RequestFactory, SimpleTestCase, TestCase, override_settings
+from django.test import Client, RequestFactory, SimpleTestCase, TestCase, override_settings
 from django.urls import reverse
 from .detector import AttackCNN, AttackDetector, DetectionResult, ExplanationSpan
 from .middleware import AttackDetectionMiddleware, InspectionError, request_text
@@ -46,6 +46,49 @@ class PreprocessingTests(SimpleTestCase):
         request = self.factory.post("/api", '{"text":"<script>alert(1)</script>"}', content_type="application/json")
         self.assertIn("<script>", request_text(request, 16384))
 
+    def test_csrf_metadata_excluded_without_changing_form_or_body(self):
+        from urllib.parse import urlencode
+        for length in (32, 64):
+            fields = {"csrfmiddlewaretoken": "A" * length,
+                      "username": "admin' OR 1=1--", "password": "synthetic"}
+            requests = [self.factory.post("/login/", fields),
+                        self.factory.post("/login/", urlencode(fields),
+                                          content_type="application/x-www-form-urlencoded")]
+            for request in requests:
+                original = request.body
+                text = request_text(request, 16384)
+                self.assertNotIn("csrfmiddlewaretoken", text)
+                self.assertIn("username=admin' or 1=1--", text)
+                self.assertEqual(request.POST["csrfmiddlewaretoken"], "A" * length)
+                self.assertEqual(request.body, original)
+
+    def test_malformed_and_duplicate_csrf_fields_remain_inspected(self):
+        for body in ("csrfmiddlewaretoken=%3Cscript%3Ealert(1)%3C/script%3E",
+                     "csrfmiddlewaretoken=" + "A" * 32 + "&csrfmiddlewaretoken=" + "B" * 32):
+            request = self.factory.post("/login/", body,
+                                        content_type="application/x-www-form-urlencoded")
+            self.assertIn("csrfmiddlewaretoken=", request_text(request, 16384))
+
+    def test_login_credentials_are_preserved_but_not_scored(self):
+        fields = {"username": "24bce0000", "password": "Private'<script>Example",
+                  "next": "/feed/", "comment": "<script>alert(1)</script>"}
+        request = self.factory.post("/login/?next=/feed/", fields)
+        original = request.body
+        text = request_text(request, 16384)
+        self.assertNotIn("24bce0000", text)
+        self.assertNotIn("password", text)
+        self.assertNotIn("private", text)
+        self.assertIn("comment=<script>alert(1)</script>", text)
+        self.assertEqual(request.POST.dict(), fields)
+        self.assertEqual(request.body, original)
+        other = request_text(self.factory.post("/api", fields), 16384)
+        self.assertIn("username=24bce0000", other)
+
+    def test_login_duplicate_or_nonstandard_usernames_remain_scored(self):
+        for usernames in (["alice", "bob"], ["admin' OR 1=1--"]):
+            text = request_text(self.factory.post("/login/", {"username": usernames}), 16384)
+            self.assertIn("username=", text)
+
     def test_large_declared_body_rejected_without_read(self):
         request = self.factory.post("/api", "x" * 100, content_type="text/plain")
         with patch.object(request, "read") as read:
@@ -85,7 +128,7 @@ class PreprocessingTests(SimpleTestCase):
             text_windows("x" * (MAX_TEXT_CHARS + 1))
 
 
-@override_settings(DEBUG=False)
+@override_settings(DEBUG=False, WAF_PIPELINE="legacy", WAF_MODE="block")
 class MiddlewareTests(SimpleTestCase):
     def setUp(self):
         self.factory = RequestFactory()
@@ -124,6 +167,26 @@ class MiddlewareTests(SimpleTestCase):
         self.assertEqual(response.status_code, 403)
         self.assertTrue(payload["explanation_available"])
         self.assertEqual(payload["attack_probability"], .99)
+
+    def test_login_navigation_and_known_redirects_bypass(self):
+        for path in ("/login", "/login/", "/login/?next=/feed/",
+                     "/login/?next=%2Fuser_list%2F", "/login/?next=/"):
+            middleware = self.middleware(True)
+            self.assertEqual(middleware(self.factory.get(path)).status_code, 200)
+            self.assertIsNone(middleware.detector.seen)
+
+    def test_login_exemption_does_not_cover_other_inputs(self):
+        for path in ("/login/?next=https://example.com/", "/login/?next=//example.com/",
+                     "/login/?next=/feed/&next=/", "/login/?next=/feed/&q=attack",
+                     "/login/?next=/feed/%3Fq=attack", "/login/?q=attack"):
+            middleware = self.middleware(True)
+            self.assertEqual(middleware(self.factory.get(path)).status_code, 403)
+            self.assertIsNotNone(middleware.detector.seen)
+        for method in ("GET", "HEAD", "POST"):
+            middleware = self.middleware(True)
+            request = self.factory.generic(method, "/login/?next=/feed/", "attack",
+                                           content_type="text/plain")
+            self.assertEqual(middleware(request).status_code, 403)
 
     def test_logging_contains_no_payload_or_spans(self):
         with self.assertLogs("Post.middleware", level="INFO") as logs:
@@ -199,6 +262,7 @@ class PostViewTests(TestCase):
         self.assertEqual(self.client.post(reverse("delete", args=[self.post.pk])).status_code, 302)
 
 
+@override_settings(WAF_PIPELINE="legacy", WAF_MODE="block")
 class RealModelIntegrationTests(SimpleTestCase):
     def test_saved_model_through_real_middleware_json_body(self):
         request = RequestFactory().post("/api", '{"q":"<script>alert(1)</script>"}', content_type="application/json")
@@ -207,3 +271,100 @@ class RealModelIntegrationTests(SimpleTestCase):
         self.assertTrue(hasattr(request, "attack_detection"))
         self.assertEqual(response.status_code, 403)
         self.assertTrue(json.loads(response.content)["explanation_available"])
+
+
+@override_settings(WAF_PIPELINE="legacy", WAF_MODE="block")
+class LoginFlowIntegrationTests(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.password = "Synthetic!'<script> OR 1=1--"
+        cls.user = User.objects.create_user("24bce0000", password=cls.password)
+
+    def setUp(self):
+        self.client = Client(enforce_csrf_checks=True)
+        self.client.get("/login/")
+        self.token = self.client.cookies["csrftoken"].value
+
+    def test_real_login_with_student_style_username_and_opaque_password(self):
+        from urllib.parse import urlencode
+        response = self.client.post("/login/?next=/feed/", urlencode({
+            "username": self.user.username, "password": self.password,
+            "csrfmiddlewaretoken": self.token}), content_type="application/x-www-form-urlencoded")
+        self.assertRedirects(response, "/feed/", fetch_redirect_response=False)
+        self.assertEqual(self.client.session["_auth_user_id"], str(self.user.pk))
+
+    def test_login_still_requires_csrf_and_correct_password(self):
+        response = self.client.post("/login/", {
+            "username": self.user.username, "password": self.password})
+        self.assertEqual(response.status_code, 403)
+        response = self.client.post("/login/", {
+            "username": self.user.username, "password": "wrong",
+            "csrfmiddlewaretoken": self.token})
+        self.assertEqual(response.status_code, 200)
+        self.assertNotIn("_auth_user_id", self.client.session)
+
+    def test_sql_injection_username_block_does_not_expose_password(self):
+        response = self.client.post("/login/", {
+            "username": "admin' OR 1=1--", "password": self.password,
+            "csrfmiddlewaretoken": self.token}, HTTP_ACCEPT="application/json")
+        self.assertEqual(response.status_code, 403)
+        payload = response.json()
+        self.assertIn("attack_probability", payload)
+        self.assertNotIn("synthetic", response.content.decode().lower())
+
+    def test_account_page_navigation_and_authentication_requirement(self):
+        response = self.client.get("/password_change/")
+        self.assertRedirects(response, "/login/?next=/password_change/", fetch_redirect_response=False)
+        self.assertEqual(self.client.get(response.url).status_code, 200)
+        self.client.force_login(self.user)
+        for path in ("/password_change/", "/password_change/done/", "/password_reset/",
+                     "/password_reset/done/", "/reset/done/"):
+            with self.subTest(path=path):
+                self.assertEqual(self.client.get(path).status_code, 200)
+
+    def test_password_change_validates_csrf_old_password_and_updates_password(self):
+        self.client.force_login(self.user)
+        new_password = "Replacement!'<script> OR 1=1--"
+        fields = {"old_password": self.password, "new_password1": new_password,
+                  "new_password2": new_password}
+        self.assertEqual(self.client.post("/password_change/", fields).status_code, 403)
+        fields["csrfmiddlewaretoken"] = self.token
+        fields["old_password"] = "incorrect"
+        response = self.client.post("/password_change/", fields)
+        self.assertEqual(response.status_code, 200)
+        self.user.refresh_from_db()
+        self.assertTrue(self.user.check_password(self.password))
+        fields["old_password"] = self.password
+        response = self.client.post("/password_change/", fields)
+        self.assertRedirects(response, "/password_change/done/", fetch_redirect_response=False)
+        self.user.refresh_from_db()
+        self.assertTrue(self.user.check_password(new_password))
+
+    def test_reset_confirmation_token_validation_and_password_submission(self):
+        from django.contrib.auth.tokens import default_token_generator
+        from django.utils.http import urlsafe_base64_encode
+        from django.utils.encoding import force_bytes
+        uid = urlsafe_base64_encode(force_bytes(self.user.pk))
+        token = default_token_generator.make_token(self.user)
+        self.assertEqual(self.client.get(f"/reset/{uid}/invalid-token/").status_code, 200)
+        response = self.client.get(f"/reset/{uid}/{token}/")
+        self.assertEqual(response.status_code, 302)
+        reset_path = response.url
+        self.assertEqual(self.client.get(reset_path).status_code, 200)
+        new_password = "Reset!'<script> OR 1=1--"
+        response = self.client.post(reset_path, {"new_password1": new_password,
+            "new_password2": new_password, "csrfmiddlewaretoken": self.token})
+        self.assertRedirects(response, "/reset/done/", fetch_redirect_response=False)
+        self.user.refresh_from_db()
+        self.assertTrue(self.user.check_password(new_password))
+
+    def test_password_change_extra_payload_still_scored_without_passwords(self):
+        request = RequestFactory().post("/password_change/", {
+            "old_password": "PrivateOld", "new_password1": "PrivateNew",
+            "new_password2": "PrivateNew", "extra": "<script>alert(1)</script>"})
+        text = request_text(request, 16384)
+        self.assertNotIn("private", text)
+        self.assertIn("<script>", text)
+        self.assertFalse(request._waf_auth_metadata_only)
+        middleware = AttackDetectionMiddleware(lambda request: HttpResponse("allowed"))
+        self.assertEqual(middleware(request).status_code, 403)

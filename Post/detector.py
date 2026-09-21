@@ -74,11 +74,12 @@ class DetectionResult:
 
 
 class AttackDetector:
-    def __init__(self, model_path: Path, vocabulary_path: Path, threshold=None):
+    def __init__(self, model_path: Path, vocabulary_path: Path, threshold=None,
+                 preprocessing_version=PREPROCESSING_VERSION):
         with vocabulary_path.open("rb") as stream:
             self.char2idx = pickle.load(stream)
         checkpoint = torch.load(model_path, map_location="cpu", weights_only=True)
-        if checkpoint.get("preprocessing_version") != PREPROCESSING_VERSION:
+        if checkpoint.get("preprocessing_version") != preprocessing_version:
             raise ValueError("Model preprocessing version mismatch; retrain with train.py")
         if hashlib.sha256(vocabulary_path.read_bytes()).hexdigest() != checkpoint["vocabulary_sha256"]:
             raise ValueError("Model and vocabulary artifact hashes do not match")
@@ -86,8 +87,9 @@ class AttackDetector:
         self.model.load_state_dict(checkpoint["state_dict"])
         self.model.eval()
         self.threshold = float(checkpoint["threshold"] if threshold is None else threshold)
-        if not 0 < self.threshold < 1:
-            raise ValueError("Threshold must lie strictly between 0 and 1")
+        if not (0 < self.threshold < 1 or
+                preprocessing_version != PREPROCESSING_VERSION and 0 <= self.threshold <= 1):
+            raise ValueError("Invalid checkpoint threshold")
 
     def encode(self, text):
         return encode_text(text, self.char2idx)

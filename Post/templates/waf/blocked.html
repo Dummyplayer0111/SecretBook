@@ -10,8 +10,8 @@
 <body><main>
   <h1>Request blocked</h1>
   <p>The runtime security model classified this request as potentially malicious.</p>
-  <p><strong>Attack probability:</strong> {% widthratio attack_probability 1 100 %}%</p>
-  <div class="meter" aria-label="Attack probability"><span></span></div>
+  <p><strong>Model score:</strong> {% widthratio attack_probability 1 100 %}% (not a calibrated attack probability)</p>
+  <div class="meter" aria-label="Model score"><span></span></div>
   {% if influential_spans %}<h2>Most influential regions</h2><ul>
     {% for span in influential_spans %}<li><code>{{ span.text }}</code> — importance {{ span.importance }}</li>{% endfor %}
   </ul>{% else %}<p>No reliable character attribution was available for this decision.</p>{% endif %}

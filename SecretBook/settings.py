@@ -151,13 +151,25 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static_media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = "profile"
+LOGIN_URL = "login"
 
 # Explainable runtime WAF. Values can be overridden in SecretBook/.env.
 WAF_ATTACK_THRESHOLD = config('WAF_ATTACK_THRESHOLD', default='', cast=lambda value: float(value) if value else None)
 WAF_MAX_BODY_BYTES = config('WAF_MAX_BODY_BYTES', default=16384, cast=int)
 WAF_EXPLAIN_BLOCKS = config('WAF_EXPLAIN_BLOCKS', default=True, cast=bool)
 WAF_EXPOSE_DEBUG_HEADERS = config('WAF_EXPOSE_DEBUG_HEADERS', default=False, cast=bool)
-WAF_SAFE_EMPTY_PATHS = ('/', '/feed/', '/signup/', '/login/', '/profile/', '/user_list/')
+# The independently versioned follow-up is evaluated in monitor mode. Legacy
+# artifacts and exemptions remain available for historical reproduction.
+WAF_PIPELINE = config('WAF_PIPELINE', default='components')
+WAF_MODE = config('WAF_MODE', default='monitor')
+WAF_CANDIDATE_DIR = Path(config('WAF_CANDIDATE_DIR', default=str(BASE_DIR.parent / 'artifacts' / 'request_v3')))
+WAF_CANDIDATE_THRESHOLD = config('WAF_CANDIDATE_THRESHOLD', default='', cast=lambda value: float(value) if value else None)
+LOGGING['loggers']['Post.middleware']['level'] = config('WAF_LOG_LEVEL', default='INFO')
+WAF_SAFE_EMPTY_PATHS = (
+    '/', '/feed/', '/signup/', '/login/', '/profile/', '/user_list/',
+    '/logout/', '/password_change/', '/password_change/done/',
+    '/password_reset/', '/password_reset/done/', '/reset/done/',
+)
 
 
 
