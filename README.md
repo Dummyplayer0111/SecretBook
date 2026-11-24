@@ -17,6 +17,26 @@ attack-label recall; unseen-representation FPR was 40.29%. Neither model nor
 threshold was changed after this failure. See ../EXTERNAL_ECML_RESULTS.md,
 ../REQUEST_V3_RESULTS.md and ../REQUEST_V2_RESULTS.md.
 
+## Research dataset
+
+The frozen **76,323-request combined dataset is available in this repository**:
+[dataset folder and documentation](research/data/final/README.md).
+
+- [final_dataset.csv](research/data/final/final_dataset.csv): all rows with a `split` column.
+- [train.csv](research/data/final/train.csv): 56,422 training rows.
+- [validation.csv](research/data/final/validation.csv): 10,022 validation rows.
+- [test.csv](research/data/final/test.csv): 9,879 reused held-out test rows.
+- [manifest.json](research/data/final/manifest.json): provenance, counts and construction details.
+- [SHA256SUMS](research/data/final/SHA256SUMS): file integrity checksums.
+
+Rows include normalized request text, a normal/attack label, source provenance,
+sample/group identifiers and split membership. See the dataset README for the
+complete schema and training-only augmentation details.
+
+This is the historical CNN dataset, not the separate ECML/PKDD external dataset
+or later application benchmarks. Upstream redistribution permissions remain
+unverified; see the dataset README for the third-party licensing caveat.
+
 ## Run
 
 From this directory:
