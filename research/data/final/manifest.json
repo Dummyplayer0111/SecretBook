@@ -1,0 +1,73 @@
+{
+  "seed": 42,
+  "preprocessing_version": "nfkc-html-url2-windows-v1",
+  "sources": {
+    "sqli": {
+      "file": "SQLiV3.csv",
+      "sha256": "c48b9e66fc9482817d5f2f42cbe47fa6a8f5a6f5199248cc635eaaa5bf0894ea",
+      "raw_rows": 30919,
+      "valid_source_rows": 30609,
+      "invalid_or_missing": 310
+    },
+    "xss": {
+      "file": "XSS_dataset.csv",
+      "sha256": "1890838860bc48b5e2522d6b6e5528ae52ebee0a1ba239e4a1856d1422444e92",
+      "raw_rows": 13686,
+      "valid_source_rows": 13686,
+      "invalid_or_missing": 0
+    },
+    "csic": {
+      "file": "csic_database.csv",
+      "sha256": "c420f0bc0464376de75b6c419a0ac226fe69fe12c8ac4908843273721e44e637",
+      "raw_rows": 61065,
+      "valid_source_rows": 61065,
+      "invalid_or_missing": 0
+    }
+  },
+  "empty_or_over_limit": 2,
+  "conflicting_normalized_labels": 6404,
+  "duplicate_normalized_rows_removed": 32541,
+  "deployment_augmentation_rows": 9910,
+  "cross_split_unknown_collisions": 0,
+  "final_samples": 76323,
+  "vocabulary_size": 116,
+  "class_counts": {
+    "0": 39308,
+    "1": 37015
+  },
+  "split_counts": {
+    "train": 56422,
+    "validation": 10022,
+    "test": 9879
+  },
+  "split_source_class_counts": {
+    "test|csic|0": 1203,
+    "test|csic|1": 2559,
+    "test|sqli|0": 2789,
+    "test|sqli|1": 1679,
+    "test|xss|0": 490,
+    "test|xss|1": 1159,
+    "train|csic|0": 6941,
+    "train|csic|1": 10529,
+    "train|deployment|0": 6910,
+    "train|deployment|1": 3000,
+    "train|sqli|0": 13694,
+    "train|sqli|1": 7818,
+    "train|xss|0": 2545,
+    "train|xss|1": 4985,
+    "validation|csic|0": 1468,
+    "validation|csic|1": 2308,
+    "validation|sqli|0": 2764,
+    "validation|sqli|1": 1812,
+    "validation|xss|0": 504,
+    "validation|xss|1": 1166
+  },
+  "groups": 53675,
+  "largest_group": 1062,
+  "group_overlap": 0,
+  "encoded_document_overlap": 0,
+  "split_policy": "20 stratified group folds: 14 train, 3 validation, 3 test; seed 42",
+  "synthetic_samples": 6910,
+  "label_flips": 0,
+  "dataset_sha256": "8658ebe482685806845a2f28177072e8eff27a3cc456e97fd499d8ff250cad75"
+}
